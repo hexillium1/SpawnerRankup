@@ -1,0 +1,63 @@
+#true for leveling up an entire spawner, and false for leveling up its components
+#########WARNING###########
+##leveling up of the     ##
+##individual components  ##
+##is not yet supported   ##
+###########################
+#Leave this true
+levelup-whole-spawner: true
+components:
+  #Number of mobs to ATTEMPT to spawn per activation
+  SpawnCount:
+    LevelupCost: 100
+    LevelupValue: 2
+    MaxUpgrades: 10
+  #The range in which the spawner will ATTEMPT to spawn
+  SpawnRange:
+    LevelupCost: 100
+    LevelupValue: 1
+    MaxUpgrades: 10
+  #The minimum delay between spawner activation in ticks
+  MinSpawnDelay:
+    LevelupCost: 100
+    #WARNING, MIN DELAY MUST BE LOWER THAN MAX DELAY AT ALL TIMES
+    LevelupValue: -10
+    MaxUpgrades: 10
+  #The maximum delay between spawner activation in ticks
+  MaxSpawnDelay:
+    LevelupCost: 100
+    #WARNING, MIN DELAY MUST BE LOWER THAN MAX DELAY AT ALL TIMES
+    LevelupValue: -10
+    MaxUpgrades: 10
+  #The maximum number of nearby entities the spawner can still work with.
+  #More than this value of mobs nearby will cause the spawner to skip activations (useful against lag)
+  MaxNearbyEntites:
+    LevelupCost: 100
+    LevelupValue: 3
+    MaxUpgrades: 10
+  #The range required for a player to activate the spawner in blocks
+  RequiredPlayerRange:
+    LevelupCost: 100
+    LevelupValue: 1
+    MaxUpgrades: 2
+levelups:
+  #Number of mobs to ATTEMPT to spawn per activation
+  SpawnCount: 2
+  #The range in which the spawner will ATTEMPT to spawn
+  SpawnRange: 1
+  #The minimum delay between spawner activation in ticks
+  MinSpawnDelay: -1
+  #The maximum delay between spawner activation in ticks
+  MaxSpawnDelay: -1
+  #The maximum number of nearby entities the spawner can still work with.
+  #More than this value of mobs nearby will cause the spawner to skip activations (useful against lag)
+  MaxNearbyEntities: 2
+  #The range required for a player to activate the spawner in blocks
+  RequiredPlayerRange: -1
+  #List of level costs. Can only upgrade whilst there is another level in the list
+  Costs:
+    - 0
+    - 50
+    - 100
+    - 200
+    - 300

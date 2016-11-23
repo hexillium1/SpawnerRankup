@@ -1,0 +1,17 @@
+name: SpawnerRankup
+author: oliver276
+link: https://bukkit.org/threads/spawner-rank-up.435449/
+website: https://bukkit.org/threads/spawner-rank-up.435449/
+version: 1
+main: me.oliver276.spawnerrankup.Main
+commands:
+  spawnerrankup:
+    usage: /<command> <args>
+    aliases: ["sr","spawnerr","srankup","spawner"]
+permissions:
+  spawnerrankup.reload:
+    default: op
+    description: reload the config file
+  spawnerrankup.gui:
+    default: true
+    description: allow users to interact with a spawner using SpawnerRankup
