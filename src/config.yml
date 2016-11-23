@@ -1,9 +1,9 @@
 #true for leveling up an entire spawner, and false for leveling up its components
-#########WARNING###########
-##leveling up of the     ##
-##individual components  ##
-##is not yet supported   ##
-###########################
+#########WARNING##########
+##leveling up of the    ##
+##individual components ##
+##is not yet supported  ##
+##########################
 #Leave this true
 levelup-whole-spawner: true
 components:
