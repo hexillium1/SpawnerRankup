@@ -16,5 +16,6 @@ public interface SpawnerRankup {
     public String getStringWithinCompound(Block block, String compoundKey, String stringKey);
     public void setStringWithinCompound(Block block, String compoundKey, String stringKey, String stringValue);
     public void setSpawnerType(Block spawner,String entityType);
+    public String getSpawnerType(Block spawner);
 
 }

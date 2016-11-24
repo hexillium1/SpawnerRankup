@@ -21,7 +21,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
@@ -72,12 +71,10 @@ public class Main extends JavaPlugin implements Listener{
         getLogger().info("Your server is running version " + version);
 
         if (version.equals("v1_10_R1")) {
-            //server is running 1.8-1.8.1 so we need to use the 1.8 R1 NMS class
             spawnerRankup = new SpawnerRankup_1_10_R1();
 
-        } //else if (version.equals("v1_8_R2")) {
-            //server is running 1.8.3 so we need to use the 1.8 R2 NMS class
-            //actionbar = new Actionbar_1_8_R2();
+        } //else if (version.equals("v1_10_R2")) {
+
         //}
         return spawnerRankup != null;
     }
@@ -119,7 +116,7 @@ public class Main extends JavaPlugin implements Listener{
             Bukkit.getPluginManager().callEvent(spawnerBreak);
             if (spawnerBreak.isCancelled())  return;
             String entityToSpawn = spawnerRankup.getStringWithinCompound(spawner,"SpawnData","id");
-            ItemStack spawnerItemToDrop = makeItem(Material.MOB_SPAWNER,entityToSpawn + " spawner", Arrays.asList(
+            ItemStack spawnerItemToDrop = makeItem(Material.MOB_SPAWNER, ChatColor.DARK_GREEN + entityToSpawn + " spawner", Arrays.asList(
                     "SpawnCount: " + spawnerRankup.getShort(spawner,"SpawnCount"),
                     "SpawnRange: " + spawnerRankup.getShort(spawner,"SpawnRange"),
                     "MaxSpawnDelay: " + spawnerRankup.getShort(spawner,"MaxSpawnDelay"),
@@ -146,7 +143,7 @@ public class Main extends JavaPlugin implements Listener{
             String[] tags = tag.split(": ");
             spawnerRankup.setShort(e.getBlock(),tags[0].replaceAll(": ",""),Short.valueOf(tags[1].replaceAll(": ","")));
         }
-        spawnerRankup.setSpawnerType(e.getBlock(),name.split(" ")[0].replaceAll(" ",""));
+        spawnerRankup.setSpawnerType(e.getBlock(),name.split(" ")[0].replaceAll(" ","").replaceAll(ChatColor.DARK_GREEN + "",""));
     }
 
     @EventHandler
@@ -155,10 +152,11 @@ public class Main extends JavaPlugin implements Listener{
         if (!(e.getClickedBlock().getType().equals(Material.MOB_SPAWNER))) return;
         if (e.getPlayer().isSneaking()) return;
         Block spawner = e.getClickedBlock();
-        Inventory inv = Bukkit.createInventory(null,5*9,ChatColor.RED + "" + ChatColor.BOLD + "Spawner @ X:" +
+        Inventory inv = Bukkit.createInventory(null,5*9,ChatColor.RED + "" + (spawnerRankup.getSpawnerType(spawner) + " Spawner"));
+                /*+ "Spawner @ X:" +
                 spawner.getLocation().getBlockX() + ", Y:" +
                 spawner.getLocation().getBlockY() + ", Z:" +
-                spawner.getLocation().getBlockZ() + ".");
+                spawner.getLocation().getBlockZ() + ".");*/
 
         addInfoItems(inv,spawner);
 

@@ -1,17 +1,17 @@
 package me.oliver276.spawnerrankup.rankup;
 
 import me.oliver276.spawnerrankup.SpawnerRanks;
-import net.minecraft.server.v1_10_R1.*;
+import net.minecraft.server.v1_8_R3.BlockPosition;
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.minecraft.server.v1_8_R3.TileEntity;
+import net.minecraft.server.v1_8_R3.TileEntityMobSpawner;
 import org.bukkit.block.Block;
-import org.bukkit.block.CreatureSpawner;
-import org.bukkit.craftbukkit.v1_10_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_10_R1.block.CraftCreatureSpawner;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftCreature;
-import org.bukkit.entity.EntityType;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R3.block.CraftCreatureSpawner;
 
 import java.util.HashMap;
 
-public class SpawnerRankup_1_10_R1 implements SpawnerRankup{
+public class SpawnerRankup_1_8_R3 implements SpawnerRankup{
 
     private final short SpawnCount = 4;
     private final short SpawnRange = 4;
@@ -21,8 +21,9 @@ public class SpawnerRankup_1_10_R1 implements SpawnerRankup{
     private final short RequiredPlayerRange = 16;
 
     public NBTTagCompound getCompound(Block block, String key){
-        TileEntity s = getTileEntity(block);
-        NBTTagCompound sNBT = s.c();
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(block);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
         return sNBT.getCompound(key);
     }
 
@@ -33,8 +34,9 @@ public class SpawnerRankup_1_10_R1 implements SpawnerRankup{
     }
 
     public int determineOverallRank(Block block){
-        TileEntity s = getTileEntity(block);
-        NBTTagCompound sNBT = s.c();
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(block);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
         HashMap<String,Short> upgrades = SpawnerRanks.getInstance().getUpgradesComplete();
         short[] shorts = new short[6];
         shorts[0] = (short) (sNBT.getInt("SpawnCount") - SpawnCount);
@@ -61,23 +63,28 @@ public class SpawnerRankup_1_10_R1 implements SpawnerRankup{
 
     @Override
     public String getStringWithinCompound(Block block, String compoundKey, String stringKey) {
-        TileEntity s = getTileEntity(block);
-        NBTTagCompound sNBT = s.c();
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(block);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
         return sNBT.getCompound(compoundKey).getString(stringKey);
     }
 
     @Override
     public void setStringWithinCompound(Block block, String compoundKey, String stringKey, String stringValue) {
-        TileEntity s = getTileEntity(block);
-        NBTTagCompound sNBT = s.c();
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(block);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
         NBTTagCompound NBTc = new NBTTagCompound();
         NBTc.setString(stringKey,stringValue);
         sNBT.set(compoundKey, (NBTc));
+        s.a(sNBT);
+
     }
 
     public short getShort(Block block, String key){
-        TileEntity s = getTileEntity(block);
-        NBTTagCompound sNBT = s.c();
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(block);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
         return sNBT.getShort(key);
     }
 
@@ -85,8 +92,9 @@ public class SpawnerRankup_1_10_R1 implements SpawnerRankup{
     public void spawnerRankUp(int currentRank, Block spawner) {
         SpawnerRanks srs = SpawnerRanks.getInstance();
         HashMap<String,Short> values = srs.getUpgradesComplete();
-        TileEntity s = getTileEntity(spawner);
-        NBTTagCompound sNBT = s.c();
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(spawner);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
         sNBT.setShort("SpawnCount",(short) (sNBT.getShort("SpawnCount") + values.get("SpawnCount")));
         sNBT.setShort("SpawnRange",(short) (sNBT.getShort("SpawnRange") + values.get("SpawnRange")));
         sNBT.setShort("Delay",(short) 0);
@@ -105,16 +113,18 @@ public class SpawnerRankup_1_10_R1 implements SpawnerRankup{
     }
 
     public int getInt(Block block, String key){
-            TileEntity s = getTileEntity(block);
-            NBTTagCompound sNBT = s.c();
-            return sNBT.getInt(key);
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(block);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
+        return sNBT.getInt(key);
 
     }
 
 
     public boolean exists(Block block, String key){
-        TileEntity s = getTileEntity(block);
-        NBTTagCompound sNBT = s.c();
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(block);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
         return sNBT.hasKey(key);
     }
 
@@ -126,25 +136,26 @@ public class SpawnerRankup_1_10_R1 implements SpawnerRankup{
     }
 
     public void setShort(Block tileEntityBlock, String key, short value){
-        TileEntity s = getTileEntity(tileEntityBlock);
-        NBTTagCompound sNBT = s.c();
-        sNBT.setShort(key,value);
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(tileEntityBlock);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
+        sNBT.setShort(key, value);
         s.a(sNBT);
-        s.save(sNBT);
     }
 
     public void setString(Block tileEntityBlock, String key, String value){
-        TileEntity s = getTileEntity(tileEntityBlock);
-        NBTTagCompound sNBT = s.c();
-        sNBT.setString(key,value);
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(tileEntityBlock);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
+        sNBT.setString(key, value);
         s.a(sNBT);
-        s.save(sNBT);
     }
 
     @Override
     public String getString(Block block, String key) {
-        TileEntity s = getTileEntity(block);
-        NBTTagCompound sNBT = s.c();
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(block);
+        NBTTagCompound sNBT = new NBTTagCompound();
+        s.b(sNBT);
         return sNBT.getString(key);
     }
 

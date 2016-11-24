@@ -5,7 +5,9 @@
 ##is not yet supported  ##
 ##########################
 #Leave this true
+#If put to false, you won't be able to level up the spawner
 levelup-whole-spawner: true
+#The whole of components: is for a future update, and does nothing at the moment! Look out!
 components:
   #Number of mobs to ATTEMPT to spawn per activation
   SpawnCount:
@@ -55,6 +57,7 @@ levelups:
   #The range required for a player to activate the spawner in blocks
   RequiredPlayerRange: -1
   #List of level costs. Can only upgrade whilst there is another level in the list
+  #the first item in the list will be ignored.
   Costs:
     - 0
     - 50
