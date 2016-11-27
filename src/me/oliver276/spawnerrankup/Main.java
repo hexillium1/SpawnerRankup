@@ -1,7 +1,6 @@
 package me.oliver276.spawnerrankup;
 
-import me.oliver276.spawnerrankup.rankup.SpawnerRankup;
-import me.oliver276.spawnerrankup.rankup.SpawnerRankup_1_10_R1;
+import me.oliver276.spawnerrankup.rankup.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -73,9 +72,15 @@ public class Main extends JavaPlugin implements Listener{
         if (version.equals("v1_10_R1")) {
             spawnerRankup = new SpawnerRankup_1_10_R1();
 
-        } //else if (version.equals("v1_10_R2")) {
-
-        //}
+        } else if (version.equals("v1_9_R1")) {
+            spawnerRankup = new SpawnerRankup_1_9_R1();
+        } else if (version.equals("v1_9_R2")) {
+            spawnerRankup = new SpawnerRankup_1_9_R2();
+        } else if (version.equals("v1_8_R3")) {
+            spawnerRankup = new SpawnerRankup_1_8_R3();
+        } else if (version.equals("v1_11_R1")) {
+            spawnerRankup = new SpawnerRankup_1_11_R1();
+        }
         return spawnerRankup != null;
     }
 
