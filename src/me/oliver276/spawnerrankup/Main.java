@@ -86,7 +86,8 @@ public class Main extends JavaPlugin implements Listener{
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e){
-        if (!(e.getInventory().getTitle().startsWith(ChatColor.RED + "" + ChatColor.BOLD + "Spawner @ "))) return;
+        if (!(e.getInventory().getTitle().contains("Spawner"))) return;
+        if (!(e.getInventory().getTitle().startsWith(ChatColor.RED +""))) return;
         if ((e.getInventory().getSize() != 9*5)) return;
         if (e.getCurrentItem() == null) return;
         if (e.getCurrentItem().getType().equals(Material.AIR)) return;
@@ -120,7 +121,8 @@ public class Main extends JavaPlugin implements Listener{
             BlockBreakEvent spawnerBreak = new BlockBreakEvent(spawner,(Player) e.getWhoClicked());
             Bukkit.getPluginManager().callEvent(spawnerBreak);
             if (spawnerBreak.isCancelled())  return;
-            String entityToSpawn = spawnerRankup.getStringWithinCompound(spawner,"SpawnData","id");
+            //String entityToSpawn = spawnerRankup.getStringWithinCompound(spawner,"SpawnData","id");
+            String entityToSpawn = spawnerRankup.getSpawnerType(spawner);
             ItemStack spawnerItemToDrop = makeItem(Material.MOB_SPAWNER, ChatColor.DARK_GREEN + entityToSpawn + " spawner", Arrays.asList(
                     "SpawnCount: " + spawnerRankup.getShort(spawner,"SpawnCount"),
                     "SpawnRange: " + spawnerRankup.getShort(spawner,"SpawnRange"),

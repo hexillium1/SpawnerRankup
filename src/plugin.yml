@@ -2,7 +2,7 @@ name: SpawnerRankup
 author: oliver276
 link: https://bukkit.org/threads/spawner-rank-up.435449/
 website: https://bukkit.org/threads/spawner-rank-up.435449/
-version: 1
+version: 2
 main: me.oliver276.spawnerrankup.Main
 commands:
   spawnerrankup:

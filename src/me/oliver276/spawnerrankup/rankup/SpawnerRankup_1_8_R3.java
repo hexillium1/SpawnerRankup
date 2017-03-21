@@ -1,13 +1,9 @@
 package me.oliver276.spawnerrankup.rankup;
 
 import me.oliver276.spawnerrankup.SpawnerRanks;
-import net.minecraft.server.v1_8_R3.BlockPosition;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
-import net.minecraft.server.v1_8_R3.TileEntity;
-import net.minecraft.server.v1_8_R3.TileEntityMobSpawner;
+import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.block.CraftCreatureSpawner;
 
 import java.util.HashMap;
 
@@ -88,7 +84,7 @@ public class SpawnerRankup_1_8_R3 implements SpawnerRankup{
         return sNBT.getShort(key);
     }
 
-    @Override
+
     public void spawnerRankUp(int currentRank, Block spawner) {
         SpawnerRanks srs = SpawnerRanks.getInstance();
         HashMap<String,Short> values = srs.getUpgradesComplete();
@@ -108,12 +104,13 @@ public class SpawnerRankup_1_8_R3 implements SpawnerRankup{
     }
 
     public String getSpawnerType(Block spawner){
-        CraftCreatureSpawner cs = (CraftCreatureSpawner) spawner;
-        return cs.getCreatureTypeName();
+        TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(spawner);
+        return s.getSpawner().getMobName();
     }
 
     public int getInt(Block block, String key){
         TileEntityMobSpawner s = (TileEntityMobSpawner) getTileEntity(block);
+        s.getSpawner().getMobName();
         NBTTagCompound sNBT = new NBTTagCompound();
         s.b(sNBT);
         return sNBT.getInt(key);
