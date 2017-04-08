@@ -3,11 +3,8 @@ package me.oliver276.spawnerrankup.rankup;
 import me.oliver276.spawnerrankup.SpawnerRanks;
 import net.minecraft.server.v1_10_R1.*;
 import org.bukkit.block.Block;
-import org.bukkit.block.CreatureSpawner;
 import org.bukkit.craftbukkit.v1_10_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_10_R1.block.CraftCreatureSpawner;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftCreature;
-import org.bukkit.entity.EntityType;
 
 import java.util.HashMap;
 

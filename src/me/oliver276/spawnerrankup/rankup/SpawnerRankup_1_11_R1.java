@@ -1,9 +1,7 @@
 package me.oliver276.spawnerrankup.rankup;
 
 import me.oliver276.spawnerrankup.SpawnerRanks;
-import net.minecraft.server.v1_11_R1.BlockPosition;
-import net.minecraft.server.v1_11_R1.NBTTagCompound;
-import net.minecraft.server.v1_11_R1.TileEntity;
+import net.minecraft.server.v1_11_R1.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.craftbukkit.v1_11_R1.CraftWorld;
@@ -27,8 +25,9 @@ public class SpawnerRankup_1_11_R1 implements SpawnerRankup{
     }
 
     public void setSpawnerType(Block spawner,String entityType){
-        CreatureSpawner ms = (CreatureSpawner) spawner;
-        ms.setCreatureTypeByName(entityType);
+        TileEntity s = getTileEntity(spawner);
+        TileEntityMobSpawner ms = (TileEntityMobSpawner) s;
+        ms.getSpawner().setMobName(new MinecraftKey(entityType));
     }
 
     public int determineOverallRank(Block block){
@@ -99,7 +98,7 @@ public class SpawnerRankup_1_11_R1 implements SpawnerRankup{
     }
 
     public String getSpawnerType(Block spawner){
-        CraftCreatureSpawner cs = (CraftCreatureSpawner) spawner;
+        CraftCreatureSpawner cs = (CraftCreatureSpawner) spawner.getState();
         return cs.getCreatureTypeName();
     }
 
@@ -146,5 +145,4 @@ public class SpawnerRankup_1_11_R1 implements SpawnerRankup{
         NBTTagCompound sNBT = s.d();
         return sNBT.getString(key);
     }
-
 }

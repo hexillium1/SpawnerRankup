@@ -1,7 +1,6 @@
 package me.oliver276.spawnerrankup.rankup;
 
 import org.bukkit.block.Block;
-import org.bukkit.block.CreatureSpawner;
 
 public interface SpawnerRankup {
 
