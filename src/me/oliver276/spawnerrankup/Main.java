@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,6 +21,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
@@ -51,7 +53,6 @@ public class Main extends JavaPlugin implements Listener{
     }
 
 
-
     // this method will setup our actionbar class and return true if the server is running a
     // version compatible with our NMS classes.
     // If the server is not compatible, it will return false!
@@ -67,11 +68,9 @@ public class Main extends JavaPlugin implements Listener{
             return false;
         }
 
-        getLogger().info("Your server is running version " + version);
 
         if (version.equals("v1_10_R1")) {
             spawnerRankup = new SpawnerRankup_1_10_R1();
-
         } else if (version.equals("v1_9_R1")) {
             spawnerRankup = new SpawnerRankup_1_9_R1();
         } else if (version.equals("v1_9_R2")) {
@@ -80,6 +79,23 @@ public class Main extends JavaPlugin implements Listener{
             spawnerRankup = new SpawnerRankup_1_8_R3();
         } else if (version.equals("v1_11_R1")) {
             spawnerRankup = new SpawnerRankup_1_11_R1();
+        } else if (version.equals("v1_12_R1")){
+            spawnerRankup = new SpawnerRankup_1_12_R1();
+        }
+        String compatible =  (spawnerRankup == null) ? ChatColor.RED + "is not" : ChatColor.GREEN + "is";
+        Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[SpawnerRankup] " +
+                ChatColor.WHITE + "Your server is running version " + version +
+                " which " + compatible + ChatColor.WHITE + " with this version of SpawnerRankup.  Please report any " +
+                "problems onto the DevBukkit website: https://dev.bukkit.org/projects/spawner-rankup");
+        Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
+        boolean SS = false;
+        for (Plugin plugin : plugins){
+            if (plugin.getName().equalsIgnoreCase("SilkSpawners")) SS = true;
+        }
+        if (SS){
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED +
+            "[SpawnerRankup] Warning: you have SilkSpawners on this server, which is known to be incompatible with this plugin."
+            + " This plugin will still run, but may not function correctly.");
         }
         return spawnerRankup != null;
     }

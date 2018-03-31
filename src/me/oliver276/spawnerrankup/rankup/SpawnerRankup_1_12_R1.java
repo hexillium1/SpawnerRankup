@@ -1,15 +1,14 @@
 package me.oliver276.spawnerrankup.rankup;
 
 import me.oliver276.spawnerrankup.SpawnerRanks;
-import net.minecraft.server.v1_11_R1.*;
+import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.block.Block;
-import org.bukkit.block.CreatureSpawner;
-import org.bukkit.craftbukkit.v1_11_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_11_R1.block.CraftCreatureSpawner;
+import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_12_R1.block.CraftCreatureSpawner;
 
 import java.util.HashMap;
 
-public class SpawnerRankup_1_11_R1 implements SpawnerRankup{
+public class SpawnerRankup_1_12_R1 implements SpawnerRankup{
 
     private final short SpawnCount = 4;
     private final short SpawnRange = 4;
@@ -20,7 +19,7 @@ public class SpawnerRankup_1_11_R1 implements SpawnerRankup{
 
     public NBTTagCompound getCompound(Block block, String key){
         TileEntity s = getTileEntity(block);
-        NBTTagCompound sNBT = s.save(new NBTTagCompound());
+        NBTTagCompound sNBT = s.save(new NBTTagCompound());;
         return sNBT.getCompound(key);
     }
 
@@ -93,8 +92,7 @@ public class SpawnerRankup_1_11_R1 implements SpawnerRankup{
         sNBT.setShort("MaxNearbyEntities",(short) (sNBT.getShort("MaxNearbyEntities") + values.get("MaxNearbyEntities")));
         sNBT.setShort("RequiredPlayerRange",(short) (sNBT.getShort("RequiredPlayerRange") + values.get("RequiredPlayerRange")));
         sNBT.setShort("SpawnerRank",(short) (currentRank + 1));
-
-        s.a(sNBT);
+        s.load(sNBT);
 
     }
 
@@ -128,14 +126,14 @@ public class SpawnerRankup_1_11_R1 implements SpawnerRankup{
         TileEntity s = getTileEntity(tileEntityBlock);
         NBTTagCompound sNBT = s.save(new NBTTagCompound());
         sNBT.setShort(key,value);
-        s.a(sNBT);
+        s.load(sNBT);
     }
 
     public void setString(Block tileEntityBlock, String key, String value){
         TileEntity s = getTileEntity(tileEntityBlock);
         NBTTagCompound sNBT = s.save(new NBTTagCompound());
         sNBT.setString(key,value);
-        s.a(sNBT);
+        s.load(sNBT);
     }
 
     @Override
